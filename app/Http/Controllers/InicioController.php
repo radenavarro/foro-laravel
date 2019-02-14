@@ -26,8 +26,9 @@ class InicioController extends Controller
     {
         $categorias = DB::table('categorias')->get();
         $hilos = DB::table('categorias')
-            ->select(array('hilos.*', DB::raw("categorias.titulo AS tituloCat")))
-            ->rightJoin('hilos', 'hilos.id', DB::raw("(SELECT hilos.id FROM hilos WHERE hilos.id_categoria = categorias.id ORDER BY hilos.created_at DESC LIMIT 1)"))
+            ->select(array('hilos.*', DB::raw("categorias.titulo AS tituloCat, users.name")))
+            ->join('hilos', 'hilos.id', DB::raw("(SELECT hilos.id FROM hilos WHERE hilos.id_categoria = categorias.id ORDER BY hilos.updated_at DESC LIMIT 1)"))
+            ->join('users', 'users.id', 'hilos.id_user')
             ->get();
         return view('inicio', compact('categorias','hilos'));
     }
