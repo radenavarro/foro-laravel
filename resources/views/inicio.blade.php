@@ -1,24 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    @auth
-        @if(Auth::user()->tipo_user === 'admin')
-            @isset($categorias)
-                <div class="foroContainer">
-                @foreach($hilos as $hilo)
-                    <div class="foroSeccion">
-                        <h4>{{$hilo->tituloCat}}</h4>
-                        <a href="/addThread/{{$hilo->id_categoria}}">Añade hilo</a>
-                        <span>Último post:
-                            <em>{{$hilo->titulo}}</em> por <strong>{{$hilo->name}}</strong>
-                        </span>
-                    </div>
-                @endforeach
-                    <a href="#">Añade categoría</a>
+    @isset($hilos)
+        <div class="foroContainer">
+            @foreach($hilos as $hilo)
+                <div class="foroSeccion">
+                    <h4><a href="/categoria/{{$hilo->id_categoria}}">{{$hilo->tituloCat}}</a></h4>
+                    <span>Último post:
+                        <em>{{$hilo->titulo}}</em> por <strong>{{$hilo->name}}</strong>
+                    </span>
                 </div>
-            @else
-                <span>No hay resultados en DB</span>
-            @endisset
-        @endif
-    @endAuth
+            @endforeach
+            @auth
+                @if(Auth::user()->tipo_user === 'admin')
+                    <a href="#">Añade categoría</a>
+                @endif
+            @endAuth
+        </div>
+    @else
+        <span>No hay resultados en DB</span>
+    @endisset
 @endsection

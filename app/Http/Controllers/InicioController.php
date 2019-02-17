@@ -24,13 +24,12 @@ class InicioController extends Controller
      */
     public function index()
     {
-        $categorias = DB::table('categorias')->get();
         $hilos = DB::table('categorias')
             ->select(array('hilos.*', DB::raw("categorias.titulo AS tituloCat, users.name")))
             ->join('hilos', 'hilos.id', DB::raw("(SELECT hilos.id FROM hilos WHERE hilos.id_categoria = categorias.id ORDER BY hilos.updated_at DESC LIMIT 1)"))
             ->join('users', 'users.id', 'hilos.id_user')
             ->get();
-        return view('inicio', compact('categorias','hilos'));
+        return view('inicio', compact('hilos'));
     }
 //SELECT * FROM `categorias` LEFT JOIN hilos ON hilos.id_categoria = categorias.id WHERE hilos.id = (SELECT MAX(id) FROM hilos) GROUP BY categorias.titulo
 //SELECT * FROM `categorias`, `hilos` WHERE categorias.id = hilos.id_categoria ORDER BY hilos.created_at DESC LIMIT 1
