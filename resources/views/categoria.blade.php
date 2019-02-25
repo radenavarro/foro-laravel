@@ -2,12 +2,14 @@
 
 @section('content')
     <a href="/">Volver</a>
-    @isset($todosLosHilos)
+    @isset($hilosUltimoPost)
         <div class="categoriaCont">
-            @foreach($todosLosHilos as $hilo)
-                <div class="hilo">
-                    <a href="/hilo/{{$hilo->hiloid}}">{{$hilo->titulo}}</a>
+            <div class="hiloInfo"></div><div class="hiloAutor"></div>
+            @foreach($hilosUltimoPost as $hilo)
+                <div class="hiloInfo">
+                    <a href="/hilo/{{$hilo->id}}">{{$hilo->titulo}}</a>
                 </div>
+                <div class="hiloAutor">Último mensaje por {{$hilo->name}} a las {{$hilo->created_at}}</div>
             @endforeach
         </div>    
     @endisset

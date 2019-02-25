@@ -2,3 +2,25 @@
     margin: 0;
     padding: 0;
 }
+
+.foroSeccion{
+    display: flex;
+    flex-flow: row nowrap;
+    box-sizing: border-box;
+    background-color: khaki;
+    border: 1px solid black;
+    border-bottom: none;
+}
+
+.foroSeccion:last-of-type{
+    border-bottom: 1px solid black;
+}
+
+.foroSeccion>*{
+    flex: 0 1 auto;
+    padding: 0.6em;
+}
+
+.foroSeccion h4{
+    flex-grow: 2;
+}
