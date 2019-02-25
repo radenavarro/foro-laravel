@@ -20,4 +20,15 @@
 .foroSeccion h4 {
   flex-grow: 2; }
 
+.foroSeccion .hiloInfo {
+  width: 70vw; }
+
+.foroSeccion .hiloAutor {
+  width: 30vw;
+  border-left: 1px solid black; }
+
+.foroSeccion:first-of-type > .hiloInfo, .foroSeccion:first-of-type > .hiloAutor {
+  font-weight: bold;
+  background-color: #eadc5f; }
+
 /*# sourceMappingURL=estilos.css.map */

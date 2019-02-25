@@ -47,11 +47,4 @@ class CategoriaController extends Controller
         return view('categoria', compact('todosLosHilos', 'mensajesEnHilos', 'hilosUltimoPost'));
     }
 }
-//SELECT name, hilos.titulo FROM users JOIN mensajes ON mensajes.id_user = users.id JOIN hilos ON hilos.id = mensajes.id_hilo ORDER BY mensajes.created_at DESC
-//SELECT name, hilos.titulo FROM users JOIN mensajes ON mensajes.id_user = users.id JOIN hilos ON hilos.id = mensajes.id_hilo WHERE mensajes.created_at IN (SELECT MAX(mensajes.created_at) FROM mensajes GROUP BY mensajes.id_hilo)
 
-//SELECT hilos.titulo, users.name, mensajes.created_at FROM mensajes
-//JOIN hilos ON hilos.id = mensajes.id_hilo
-//JOIN users ON users.id = mensajes.id_user
-//WHERE mensajes.id IN (
-//    SELECT MAX(mensajes.id) FROM mensajes GROUP BY mensajes.id_hilo)
