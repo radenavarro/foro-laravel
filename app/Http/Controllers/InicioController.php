@@ -24,11 +24,31 @@ class InicioController extends Controller
      */
     public function index()
     {
-        $hilos = DB::table('categorias')
+//        $hilos = DB::table('categorias')
+//            ->select(array('hilos.*', DB::raw("categorias.titulo AS tituloCat, users.name")))
+//            ->join('hilos', 'hilos.id', DB::raw("(SELECT hilos.id FROM hilos WHERE hilos.id_categoria = categorias.id ORDER BY hilos.updated_at DESC LIMIT 1)"))
+//            ->join('users', 'users.id', 'hilos.id_user')
+//            ->get();
+        $hilos = DB::table('hilos')
             ->select(array('hilos.*', DB::raw("categorias.titulo AS tituloCat, users.name")))
-            ->join('hilos', 'hilos.id', DB::raw("(SELECT hilos.id FROM hilos WHERE hilos.id_categoria = categorias.id ORDER BY hilos.updated_at DESC LIMIT 1)"))
             ->join('users', 'users.id', 'hilos.id_user')
+            ->rightJoin('categorias', 'categorias.id', 'hilos.id_categoria')
+            ->whereNull('hilos.id')
+            ->orWhere('hilos.id', DB::raw("(SELECT hilos.id WHERE hilos.created_at IN (
+            SELECT MAX(hilos.created_at) FROM HILOS GROUP BY hilos.id_categoria))"))
+            ->groupBy('categorias.titulo')// Error con group by, cambiar config -> database.php, en array mysql -> strict = false
+            ->orderBy('categorias.id', 'asc')
             ->get();
         return view('inicio', compact('hilos'));
     }
 }
+
+//SELECT * FROM `hilos`
+//RIGHT JOIN categorias ON categorias.id = hilos.id_categoria
+//WHERE hilos.id IS NULL
+//OR hilos.id = (
+//SELECT hilos.id WHERE hilos.created_at IN (
+//    SELECT MAX(hilos.created_at) FROM HILOS GROUP BY hilos.id_categoria
+//)
+//)
+//GROUP BY categorias.titulo ORDER BY categorias.id ASC
