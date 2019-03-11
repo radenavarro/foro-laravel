@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HiloController extends Controller
@@ -34,5 +35,36 @@ class HiloController extends Controller
             ->get();
 
         return view('hilo', compact('postsEnHilo'));
+    }
+
+    public function createThread(Request $request){
+        // Hilos
+        $sThreadName = $request->input('titulo');
+        $iBelongsToCategory = $request->input('idCategoria');
+        $iAuthorId = Auth::user()->id;
+
+        // Mensajes
+        $sThreadMessage = $request->input('mensaje');
+
+        // Crear hilo
+        $iIdCreatedThread = DB::table('hilos')
+            ->insertGetId([
+                'titulo' => $sThreadName,
+                'id_categoria' => $iBelongsToCategory,
+                'id_user' => $iAuthorId,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+        DB::table('mensajes')
+            ->insert([
+                'texto' => $sThreadMessage,
+                'id_hilo' => $iIdCreatedThread,
+                'id_user' => $iAuthorId,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+        return redirect()->action('InicioController@index');
     }
 }

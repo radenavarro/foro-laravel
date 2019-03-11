@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="/">Volver</a>
+    <a class="btn btn-danger" href="/">Volver</a>
+    @if(Auth::user()->tipo_user === 'admin')
+        <a class="btn btn-info btnCrearHilo" href="/nuevohilo/{{$datosCategoria->id}}">Crear hilo</a>
+    @endif
     @isset($hilosUltimoPost)
         <div class="foroContainer">
             <div class="foroSeccion">

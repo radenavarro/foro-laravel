@@ -29,6 +29,10 @@ class CategoriaController extends Controller
      */
     public function index($iId)
     {
+        $datosCategoria = DB::table('categorias')
+            ->where('id', $iId)
+            ->first();
+
         $todosLosHilos = DB::table('hilos')
             ->select(array('*', DB::raw('hilos.id AS hiloid')))
             ->join('users', 'users.id','hilos.id_user')
@@ -44,7 +48,7 @@ class CategoriaController extends Controller
             ->whereIn('mensajes.id', array(DB::raw("(SELECT MAX(mensajes.id) FROM mensajes GROUP BY mensajes.id_hilo)")))
             ->where('id_categoria', $iId)
             ->get();
-        return view('categoria', compact('todosLosHilos', 'mensajesEnHilos', 'hilosUltimoPost'));
+        return view('categoria', compact('todosLosHilos', 'mensajesEnHilos', 'hilosUltimoPost', 'datosCategoria'));
     }
 }
 

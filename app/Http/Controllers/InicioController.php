@@ -24,11 +24,6 @@ class InicioController extends Controller
      */
     public function index()
     {
-//        $hilos = DB::table('categorias')
-//            ->select(array('hilos.*', DB::raw("categorias.titulo AS tituloCat, users.name")))
-//            ->join('hilos', 'hilos.id', DB::raw("(SELECT hilos.id FROM hilos WHERE hilos.id_categoria = categorias.id ORDER BY hilos.updated_at DESC LIMIT 1)"))
-//            ->join('users', 'users.id', 'hilos.id_user')
-//            ->get();
         $hilos = DB::table('hilos')
             ->select(array('hilos.*', DB::raw("categorias.titulo AS tituloCat, users.name")))
             ->join('users', 'users.id', 'hilos.id_user')

@@ -31,4 +31,20 @@
   font-weight: bold;
   background-color: #eadc5f; }
 
+/* ===================== NEW THREAD ============================= */
+.newThreadFormContainer {
+  width: 80vw;
+  padding: 0.6em;
+  border: 1px solid black;
+  border-radius: 1em;
+  margin: 0 auto;
+  background-color: khaki; }
+
+.newThreadFormContainer form {
+  display: flex;
+  flex-flow: column nowrap; }
+
+.newThreadFormContainer form > * {
+  flex: 0 1 auto; }
+
 /*# sourceMappingURL=estilos.css.map */

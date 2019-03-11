@@ -20,5 +20,9 @@ Route::get('/', 'InicioController@index')->name('inicio');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/categoria/{id}', 'CategoriaController@index')->name('categoria');
+Route::post('/hilo', 'HiloController@createThread');
+
 Route::get('/hilo/{id}', 'HiloController@index');
+Route::get('/nuevohilo/{id}', 'NewThreadController@index');
