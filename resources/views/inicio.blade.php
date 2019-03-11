@@ -5,7 +5,7 @@
         <div class="foroContainer">
             @foreach($hilos as $hilo)
                 <div class="foroSeccion">
-                    <h4><a href="/categoria/{{$hilo->id_categoria}}">{{$hilo->tituloCat}}</a></h4>
+                    <h4><a href="/categoria/{{$hilo->idCat}}">{{$hilo->tituloCat}}</a></h4>
                     <span>Último post:
                         <em>{{$hilo->titulo}}</em> por <strong>{{$hilo->name}}</strong>
                     </span>

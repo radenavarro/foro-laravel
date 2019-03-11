@@ -25,7 +25,7 @@ class InicioController extends Controller
     public function index()
     {
         $hilos = DB::table('hilos')
-            ->select(array('hilos.*', DB::raw("categorias.titulo AS tituloCat, users.name")))
+            ->select(array('hilos.*', DB::raw("categorias.titulo AS tituloCat, categorias.id AS idCat, users.name")))
             ->join('users', 'users.id', 'hilos.id_user')
             ->rightJoin('categorias', 'categorias.id', 'hilos.id_categoria')
             ->whereNull('hilos.id')
